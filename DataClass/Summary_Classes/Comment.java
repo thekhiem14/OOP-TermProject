@@ -1,4 +1,4 @@
-package javaapplication1;
+package Summary_Classes;
 import java.sql.*;
 public class Comment {
     private String description, image, author, materialId, status;

@@ -1,4 +1,4 @@
-package javaapplication1;
+package Summary_Classes;
 import java.sql.*;
 public class MaterialCategory {
     private String id, title, parentId, description, status, slug;
@@ -68,4 +68,13 @@ public class MaterialCategory {
     public void setPosition(int position) {
         this.position = position;
     }
+
+    public Timestamp getDeleteAt() {
+        return deleteAt;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createAt;
+    }
+
 }

@@ -1,15 +1,8 @@
-package javaapplication1;
-import java.util.*;
+package Summary_Classes;
 import java.sql.*;
 public class ForgotPassword {
     private String email, otp;
     private Timestamp expiryDate;
-
-    public createOTP(){
-
-    }
-
-
 
     public ForgotPassword(String email, String otp) {
         this.email = email;
@@ -23,5 +16,13 @@ public class ForgotPassword {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getOtp(){
+        return otp;
+    }
+
+    public Timestamp getexpiryDate(){
+        return expiryDate;
     }
 }

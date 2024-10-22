@@ -1,4 +1,4 @@
-package javaapplication1;
+package Summary_Classes;
 
 import java.sql.*;
 
@@ -55,5 +55,13 @@ public class Notification {
     }
     public void setRead() {
         this.read = true;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getContent() {
+        return content;
     }
 }

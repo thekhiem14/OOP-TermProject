@@ -1,4 +1,4 @@
-package javaapplication1;
+package Summary_Classes;
 
 import java.sql.Timestamp;
 import java.util.List;

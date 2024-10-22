@@ -1,4 +1,4 @@
-package javaapplication1;
+package Summary_Classes;
 import java.sql.*;
 public class Material {
     private String id, title, description, materialCategoryId, thumbnail, status, slug, creatBy;
