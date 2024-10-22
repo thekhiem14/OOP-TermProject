@@ -1,7 +1,7 @@
 package Summary_Classes;
 import java.sql.*;
 public class Comment {
-    private String description, image, author, materialId, status;
+    private String description, image, author, materialId, status, parentId;
     private Timestamp createAt, deleteAt;
     public Comment(String description, String image, String author, String materialId) {
         this.description = description;
@@ -45,6 +45,14 @@ public class Comment {
         this.image = image;
     }
 
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
+    public String getParentId() {
+        return parentId;
+    }
+
     public Timestamp getCreateAt() {
         return createAt;
     }
@@ -52,4 +60,5 @@ public class Comment {
     public Timestamp getDeleteAt() {
         return deleteAt;
     }
+    
 }
