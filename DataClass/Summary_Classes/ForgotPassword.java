@@ -9,11 +9,7 @@ public class ForgotPassword {
         this.otp = otp;
         this.expiryDate = new Timestamp(System.currentTimeMillis() + 180000);
     }
-
-    public void Expired(){
-        this.otp = null;
-    }
-
+    
     public String getEmail() {
         return email;
     }
