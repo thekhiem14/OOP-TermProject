@@ -3,11 +3,12 @@ import java.sql.*;
 public class Comment {
     private String description, image, author, materialId, status, parentId;
     private Timestamp createAt, deleteAt;
-    public Comment(String description, String image, String author, String materialId) {
+    public Comment(String description, String image, String author, String materialId, String parentId) {
         this.description = description;
         this.image = image;
         this.author = author;
         this.materialId = materialId;
+        this.parentId = parentId;
         this.status = "active";
         this.createAt = new Timestamp(System.currentTimeMillis());
     }
