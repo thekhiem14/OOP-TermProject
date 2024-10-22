@@ -3,18 +3,18 @@ package Summary_Classes;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Provliege {
+public class Privliege {
     private List<String> privliege;
 
-    public Provliege(List<String> role) {
+    public Privliege(List<String> role) {
         this.privliege = new ArrayList<String>(role);
     }
 
-    public void addRow(String newPrivliege){
+    public void addPrivliege(String newPrivliege){
         this.privliege.add(newPrivliege);
     }
 
-    public void deleteRoles(String role) {
+    public void deletePrivliege(String role) {
         if(this.privliege.contains(role)) this.privliege.remove(role);
     }
 
