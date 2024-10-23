@@ -1,18 +1,17 @@
 package Summary_Classes;
 import java.sql.*;
 public class Material {
-    private String id, title, description, materialCategoryId, thumbnail, status, slug, creatBy,filepath;
+    private String id, title, description, materialCategoryId, thumbnail, status, slug, creatBy;
     private float point;
     private Timestamp createdAt, deletedAt;
 
-    public Material(String id, float point, String title, String description, String materialCategoryId, String thumbnail, String filepath, String slug, String creatBy) {
+    public Material(String id, float point, String title, String description, String materialCategoryId, String thumbnail, String slug, String creatBy) {
         this.id = id;
         this.point = point;
         this.title = title;
         this.description = description;
         this.materialCategoryId = materialCategoryId;
         this.thumbnail = thumbnail;
-        this.filepath = filepath;
         this.status = "active";
         this.slug = slug;
         this.creatBy = creatBy;
@@ -46,10 +45,6 @@ public class Material {
         return thumbnail;
     }
 
-    public String getFilePath() {
-        return filepath;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -68,10 +63,6 @@ public class Material {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String setFilePath() {
-        return filepath;
     }
 
     public void setDescription(String description) {

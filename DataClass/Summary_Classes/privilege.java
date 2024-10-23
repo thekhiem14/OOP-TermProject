@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class privilege {
-    private List<String> privilege;
+    private List<String> privileges;
 
     public privilege(List<String> role) {
         this.privilege = new ArrayList<String>(role);
