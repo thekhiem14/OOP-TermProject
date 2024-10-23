@@ -21,4 +21,4 @@ public class ForgotPassword {
     public Timestamp getexpiryDate(){
         return expiryDate;
     }
-}
+}// createotp, sendemail, Expired 

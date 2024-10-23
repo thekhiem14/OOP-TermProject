@@ -1,49 +1,50 @@
 package Summary_Classes;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Rating {
-    private String userId, materialId;
-    private Map<String, Float> rating;
-    private float point;
+    private String materialId;
+    private Map<String, Float> ratings;
+    private float averagePoint;
 
-    public Rating(String userId, String materialId, float newPoint) {
-        this.userId = userId;
+    public Rating(String materialId) {
         this.materialId = materialId;
-        rating.put(userId, newPoint);
-        float sum = 0;
-        for (Map.Entry<String, Float> entry : rating.entrySet()) {
-            sum += entry.getValue();
-        }
-        point = sum / rating.size();
+        this.ratings = new HashMap<>();
+    }
+
+    public void addRating(String userId, float newPoint) {
+        ratings.put(userId, newPoint);
+        updatePoints();
     }
 
     public void deleteRating(String userId) {
-        if (!rating.containsKey(userId)) {
+        if (!ratings.containsKey(userId)) {
             System.out.println("User ID not found: " + userId);
             return;
         }
-        float deletePoint = rating.get(userId);
-        if (rating.size() == 1)
-            this.point = 0;
-        else
-            this.point = ((point * rating.size()) - deletePoint) / (rating.size() - 1);
-        this.rating.remove(userId);
+        ratings.remove(userId);
+        updatePoints();
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public Map<String, Float> getRating() {
-        return rating;
-    }
-
-    public float getPoint() {
-        return point;
+    private void updatePoints() {
+        float sum = 0;
+        for (float value : ratings.values()) {
+            sum += value;
+        }
+        this.averagePoint = ratings.isEmpty() ? 0 : sum / ratings.size();
     }
 
     public String getMaterialId() {
         return materialId;
     }
+
+    public Map<String, Float> getRatings() {
+        return ratings;
+    }
+
+    public float getAveragePoint() {
+        return averagePoint;
+    }
+
 }
