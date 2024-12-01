@@ -34,7 +34,7 @@ public class AdminFrame extends JFrame {
 
         // Show All Users button
         JButton showUsersButton = createStyledButton("Show All Users");
-        showUsersButton.addActionListener(this::openShowUsersFrame);
+        showUsersButton.addActionListener(e -> openShowUsersFrame(e, user));
 
         // Show All Materials button
         JButton showMaterialsButton = createStyledButton("Show All Materials");
@@ -112,7 +112,7 @@ public class AdminFrame extends JFrame {
     }
 
     // Other frames (Show All Users and Show All Materials) follow the same approach
-    private void openShowUsersFrame(ActionEvent e) {
+    private void openShowUsersFrame(ActionEvent e, User thisUser) {
         JFrame showUsersFrame = new JFrame("All Users");
         showUsersFrame.setSize(500, 400);
         showUsersFrame.setLocationRelativeTo(this);
@@ -142,10 +142,14 @@ public class AdminFrame extends JFrame {
         deleteButton.addActionListener(event -> {
             int selectedIndex = userList.getSelectedIndex();
             if (selectedIndex != -1) {
-                users.remove(selectedIndex);
-                userModel.remove(selectedIndex);
-                FileManager.saveUsers(users);
-                JOptionPane.showMessageDialog(showUsersFrame, "User deleted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                if(users.get(selectedIndex).getEmail().equals(thisUser.getEmail()))
+                    JOptionPane.showMessageDialog(showUsersFrame, "Can't delete yourself!", "Error", JOptionPane.ERROR_MESSAGE);
+                else{
+                    users.remove(selectedIndex);
+                    userModel.remove(selectedIndex);
+                    FileManager.saveUsers(users);
+                    JOptionPane.showMessageDialog(showUsersFrame, "User deleted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                }
             } else {
                 JOptionPane.showMessageDialog(showUsersFrame, "No user selected!", "Error", JOptionPane.ERROR_MESSAGE);
             }
