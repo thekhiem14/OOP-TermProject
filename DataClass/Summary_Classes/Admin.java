@@ -1,40 +1,26 @@
-package Summary_Classes;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package test;
 
-import java.sql.Timestamp;
-import java.util.List;
+import java.io.Serial;
+import java.io.Serializable;
 
-public class Admin extends User {
-    private List<privilege> privilege;
-    private String adminToken;
-    private Timestamp createdAt, deletedAt;
-
-    public Admin(String fullName, String phone, String email, String password, String avatar, String adminToken,List<privilege> privilege) {
-        super(fullName, phone, email, password, avatar);
-        this.privilege = privilege;
-        this.adminToken = "ADMIN" + adminToken;
-        this.createdAt = new Timestamp(System.currentTimeMillis());
+/**
+ *
+ * @author 24hph
+ */
+public class Admin extends User implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+    
+    public Admin(String email, String password, String name, boolean isSuperAdmin) {
+        super(email, password, name, isSuperAdmin);
     }
-
-    public List<privilege> getprivilege() {
-        return privilege;
-    }
-
-    public void setprivilege(List<privilege> privilege) {
-        this.privilege = privilege;
-    }
-
-    public String getAdminToken() {
-        return adminToken;
-    }
-
+    
     @Override
-    public Timestamp getDeletedAt() {
-        return deletedAt;
+    public boolean login(String password) {
+        return this.getPassword().equals(password);
     }
-
-    @Override
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
 }
