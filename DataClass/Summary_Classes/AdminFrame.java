@@ -6,10 +6,10 @@ import java.awt.event.ActionEvent;
 import java.util.List;
 
 public class AdminFrame extends JFrame {
-    private User currentAdmin;
+    private Admin currentAdmin;
 
     public AdminFrame(User user) {
-        this.currentAdmin = user;
+        this.currentAdmin = (Admin) user;
 
         // Frame properties
         setTitle("Admin Panel");
@@ -92,8 +92,7 @@ public class AdminFrame extends JFrame {
         addButton.addActionListener(event -> {
             String categoryName = categoryNameField.getText().trim();
             if (!categoryName.isEmpty()) {
-                CategoryManager categoryManager = new CategoryManager();
-                categoryManager.addCategory(new Category(categoryName));
+                this.currentAdmin.addCategory(categoryName);
                 JOptionPane.showMessageDialog(addCategoryFrame, "Category added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 addCategoryFrame.dispose();
             } else {
@@ -199,20 +198,8 @@ public class AdminFrame extends JFrame {
                     "Confirm Deletion",
                     JOptionPane.YES_NO_OPTION);
             if (confirmation == JOptionPane.YES_OPTION) {
-                materials.remove(selectedMaterial); 
-                materialModel.removeElementAt(selectedIndex); // Update UI
-                CategoryManager CM = new CategoryManager();
-                for (Category currentCategory:CM.getCategories())
-                {
-                    List <Material> m = currentCategory.getMaterials();
-                    if (m.contains(selectedMaterial))
-                    {
-                        CM.deleteMaterialInCategory(currentCategory,selectedMaterial);
-                        break;
-                    }
-                }
-                CM.saveCategories();
-                FileManager.saveMaterials(materials); // Save changes
+                materialModel.removeElementAt(selectedIndex);
+                this.currentAdmin.deleteMaterial(materials, selectedMaterial); // Save changes
                 JOptionPane.showMessageDialog(showMaterialsFrame,
                         "Material deleted successfully!",
                         "Success",
