@@ -1,50 +1,34 @@
-package Summary_Classes;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package test;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.Serializable;
 
-public class Rating {
-    private String materialId;
-    private Map<String, Float> ratings;
-    private float averagePoint;
-
-    public Rating(String materialId) {
-        this.materialId = materialId;
-        this.ratings = new HashMap<>();
-    }
-
-    public void addRating(String userId, float newPoint) {
-        ratings.put(userId, newPoint);
-        updatePoints();
-    }
-
-    public void deleteRating(String userId) {
-        if (!ratings.containsKey(userId)) {
-            System.out.println("User ID not found: " + userId);
-            return;
+/**
+ *
+ * @author 24hph
+ */
+public class Rating implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
+    private String raterUsername; // Store username instead of Student object
+    private int score;
+    
+    public Rating(String raterUsername, int score) {
+        if (score < 1 || score > 5) {
+            throw new IllegalArgumentException("Rating must be between 1 and 5");
         }
-        ratings.remove(userId);
-        updatePoints();
+        this.raterUsername = raterUsername;
+        this.score = score;
     }
-
-    private void updatePoints() {
-        float sum = 0;
-        for (float value : ratings.values()) {
-            sum += value;
-        }
-        this.averagePoint = ratings.isEmpty() ? 0 : sum / ratings.size();
+    
+    public String getRaterUsername() {
+        return raterUsername;
     }
-
-    public String getMaterialId() {
-        return materialId;
+    
+    public int getScore() {
+        return score;
     }
-
-    public Map<String, Float> getRatings() {
-        return ratings;
-    }
-
-    public float getAveragePoint() {
-        return averagePoint;
-    }
-
 }
