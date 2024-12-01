@@ -1,83 +1,59 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Summary_Classes;
-import java.sql.*;
-public class Material {
-    private String id, title, description, materialCategoryId, thumbnail, status, slug, creatBy;
-    private float point;
-    private Timestamp createdAt, deletedAt;
 
-    public Material(String id, float point, String title, String description, String materialCategoryId, String thumbnail, String slug, String creatBy) {
-        this.id = id;
-        this.point = point;
+import java.io.Serial;
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.*;
+
+/**
+ *
+ * @author 24hph
+ */
+public class Material implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+    
+    private String title;
+    private String description;
+    private String downloadUrl;
+    private Timestamp uploadDate;
+    private List<Comment> comments;
+    private List<Rating> ratings;
+    private User author;
+    
+    public Material(String title, String description, String downloadUrl, User author) {
         this.title = title;
         this.description = description;
-        this.materialCategoryId = materialCategoryId;
-        this.thumbnail = thumbnail;
-        this.status = "active";
-        this.slug = slug;
-        this.creatBy = creatBy;
-        this.createdAt = new Timestamp(System.currentTimeMillis());
+        this.downloadUrl = downloadUrl;
+        this.comments = new ArrayList<>();
+        this.ratings = new ArrayList<>();
+        this.uploadDate = new Timestamp(System.currentTimeMillis());
+        this.author = author;
     }
-    public void deleteMaterial(){
-        this.status = "inactive";
-        this.deletedAt = new Timestamp(System.currentTimeMillis());
+    
+    // Existing methods for comments, ratings, etc. remain the same
+      public User getAuthor() {
+        return author;
     }
-    public String getId() {
-        return id;
-    }
-
-    public float getPoint() {
-        return point;
+    public void setAuthor(User author) {
+        this.author = author;
     }
 
     public String getTitle() {
         return title;
     }
-
+    
     public String getDescription() {
         return description;
     }
-
-    public String getMaterialCategoryId() {
-        return materialCategoryId;
+    
+    public String getDownloadUrl() {
+        return downloadUrl;
     }
 
-    public String getThumbnail() {
-        return thumbnail;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public String getSlug() {
-        return slug;
-    }
-
-    public String getCreatBy() {
-        return creatBy;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
-    }
-
-    public void setSlug(String slug) {
-        this.slug = slug;
-    }
-
-    public Timestamp getDeletedAt() {
-        return deletedAt;
-    }
+    public Timestamp getUploadDate() {return uploadDate;}
 }
