@@ -8,16 +8,28 @@ public class DetailsInMaterialFrame extends JFrame {
     public DetailsInMaterialFrame(Material material, Category category, User user) {
         // Thiết lập frame
         setTitle("Material Details");
-        setSize(400, 300);
+        setSize(600, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
         // Tạo panel chính (BorderLayout)
         JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBackground(Color.WHITE);
 
-        // Tạo panel chi tiết thông tin
+        // Header panel
+        JPanel headerPanel = new JPanel(new BorderLayout());
+        headerPanel.setBackground(new Color(70, 130, 180)); // Steel blue
+        JLabel headerLabel = new JLabel("Material Details");
+        headerLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        headerLabel.setForeground(Color.WHITE);
+        headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        headerPanel.add(headerLabel, BorderLayout.CENTER);
+
+        // Panel chứa thông tin chi tiết
         JPanel detailsPanel = new JPanel();
         detailsPanel.setLayout(new BoxLayout(detailsPanel, BoxLayout.Y_AXIS));
+        detailsPanel.setBackground(Color.WHITE);
+        detailsPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         JLabel titleLabel = new JLabel("Title: " + material.getTitle());
         JLabel descriptionLabel = new JLabel("Description: " + material.getDescription());
@@ -29,59 +41,80 @@ public class DetailsInMaterialFrame extends JFrame {
 
         // Tạo panel ngang để chứa nhãn và trường URL
         JPanel urlPanel = new JPanel();
-        urlPanel.setLayout(new BoxLayout(urlPanel, BoxLayout.X_AXIS));
-
-        JLabel downloadUrlLabel = new JLabel("Download URL: ");
+        urlPanel.setLayout(new BorderLayout());
+        urlPanel.setBackground(Color.WHITE);
+        JLabel downloadUrlLabel = new JLabel("Download URL:");
         JTextField downloadUrlField = new JTextField(material.getDownloadUrl());
         downloadUrlField.setEditable(false); // Không cho phép chỉnh sửa
-        downloadUrlField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
+        downloadUrlField.setBackground(Color.LIGHT_GRAY);
+        downloadUrlField.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        urlPanel.add(downloadUrlLabel, BorderLayout.WEST);
+        urlPanel.add(downloadUrlField, BorderLayout.CENTER);
 
-        // Thêm nhãn và trường vào panel ngang
-        urlPanel.add(downloadUrlLabel);
-        urlPanel.add(downloadUrlField);
+        // Định dạng phông chữ và căn chỉnh
+        Font labelFont = new Font("Arial", Font.PLAIN, 16);
+        titleLabel.setFont(labelFont);
+        descriptionLabel.setFont(labelFont);
+        authorLabel.setFont(labelFont);
+        uploadDateLabel.setFont(labelFont);
 
         // Căn chỉnh các nhãn ở giữa
-        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        descriptionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        authorLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        uploadDateLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        titleLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        descriptionLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        authorLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        uploadDateLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         // Thêm các thành phần vào panel chi tiết
         detailsPanel.add(titleLabel);
+        detailsPanel.add(Box.createVerticalStrut(10)); // Khoảng cách giữa các thành phần
         detailsPanel.add(descriptionLabel);
+        detailsPanel.add(Box.createVerticalStrut(10));
         detailsPanel.add(authorLabel);
+        detailsPanel.add(Box.createVerticalStrut(10));
         detailsPanel.add(uploadDateLabel);
-        detailsPanel.add(urlPanel); // Thêm panel ngang vào
+        detailsPanel.add(Box.createVerticalStrut(20));
+        detailsPanel.add(urlPanel);
 
-        // Thêm panel chi tiết vào giữa frame
-        mainPanel.add(detailsPanel, BorderLayout.CENTER);
-
-        // Thêm nút "Back" ở trên cùng bên trái
+        // Thêm nút "Back"
         JButton backButton = new JButton("Back");
-        backButton.addActionListener(e -> {dispose();
-        new MaterialsInCategoryFrame(category,user).setVisible(true);});
+        backButton.setFont(new Font("Arial", Font.BOLD, 14));
+        backButton.setBackground(new Color(220, 20, 60)); // Crimson
+        backButton.setForeground(Color.WHITE);
+        backButton.setFocusPainted(false);
+        backButton.addActionListener(e -> {
+            dispose();
+            new MaterialsInCategoryFrame(category, user).setVisible(true);
+        });
         JPanel topLeftPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        topLeftPanel.setBackground(new Color(240, 240, 240));
         topLeftPanel.add(backButton);
-        mainPanel.add(topLeftPanel, BorderLayout.NORTH);
 
-        JPanel bottomPanel = new JPanel(new BorderLayout());
+        // Footer panel
+        JPanel footerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+        footerPanel.setBackground(new Color(240, 240, 240));
 
         JButton commentButton = new JButton("Comment");
-        commentButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Open comment frame!");
-        });
-        bottomPanel.add(commentButton, BorderLayout.WEST);
+        commentButton.setFont(new Font("Arial", Font.BOLD, 14));
+        commentButton.setBackground(new Color(46, 139, 87)); // Green
+        commentButton.setForeground(Color.WHITE);
+        commentButton.setFocusPainted(false);
+        commentButton.addActionListener(e -> JOptionPane.showMessageDialog(this, "Open comment frame!"));
+        footerPanel.add(commentButton);
 
         JButton ratingButton = new JButton("Rating");
-        ratingButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Open rating frame!");
-        });
-        bottomPanel.add(ratingButton, BorderLayout.EAST);
+        ratingButton.setFont(new Font("Arial", Font.BOLD, 14));
+        ratingButton.setBackground(new Color(70, 130, 180)); // Steel blue
+        ratingButton.setForeground(Color.WHITE);
+        ratingButton.setFocusPainted(false);
+        ratingButton.addActionListener(e -> JOptionPane.showMessageDialog(this, "Open rating frame!"));
+        footerPanel.add(ratingButton);
 
-        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+        // Thêm các phần vào frame
+        mainPanel.add(headerPanel, BorderLayout.NORTH);
+        mainPanel.add(detailsPanel, BorderLayout.CENTER);
+        mainPanel.add(footerPanel, BorderLayout.SOUTH);
 
-        // Thêm panel chính vào frame
-        setLayout(new BorderLayout());
         add(mainPanel);
+        setVisible(true);
     }
 }
