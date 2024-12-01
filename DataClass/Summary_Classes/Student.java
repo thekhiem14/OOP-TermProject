@@ -19,11 +19,6 @@ public class Student extends User implements Serializable {
         this.studentId = studentId;
     }
     
-    @Override
-    public boolean login(String password) {
-        return this.getPassword().equals(password);
-    }
-    
     public String getStudentId() {
         return studentId;
     }

@@ -82,7 +82,8 @@ public class Material implements Serializable {
     {
         this.ratings.remove(selectedRating);
     }
-@Override
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;  

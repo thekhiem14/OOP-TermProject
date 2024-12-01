@@ -64,5 +64,5 @@ public abstract class User implements Serializable {
         material.deleteRating(yourRating);
     }
     // Abstract login method
-    public abstract boolean login(String password);
+    public  boolean login(String password){return this.getPassword().equals(password);};
 }

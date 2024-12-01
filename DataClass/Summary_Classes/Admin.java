@@ -48,9 +48,4 @@ public class Admin extends User implements Serializable {
         CM.saveCategories();
         FileManager.saveMaterials(materials);
     }
-    
-    @Override
-    public boolean login(String password) {
-        return this.getPassword().equals(password);
-    }
 }
