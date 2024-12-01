@@ -2,8 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Summary_Classes;
-
+package test;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -25,4 +24,3 @@ public class Admin extends User implements Serializable {
         return this.getPassword().equals(password);
     }
 }
-
