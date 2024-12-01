@@ -9,10 +9,6 @@ import java.util.*;
 public class Main
 {
     public static void main(String[] args){
-        Admin a = new Admin("Khiem@", "123", "Khiem", true);
-        List<User> list = FileManager.loadUsers();
-        list.add(a);
-        FileManager.saveUsers(list);
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {

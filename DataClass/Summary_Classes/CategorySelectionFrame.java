@@ -39,7 +39,7 @@ public class CategorySelectionFrame extends JFrame {
             JButton categoryButton = new JButton(category.getName());
             categoryButton.setFont(new Font("Arial", Font.BOLD, 18));
             categoryButton.setBackground(new Color(46, 139, 87)); // Green
-            categoryButton.setForeground(Color.WHITE);
+            categoryButton.setForeground(Color.BLACK);
             categoryButton.setFocusPainted(false);
             categoryButton.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
             categoryButton.addActionListener(e -> openCategoryMaterials(category));
@@ -57,7 +57,7 @@ public class CategorySelectionFrame extends JFrame {
         JButton backButton = new JButton("Back");
         backButton.setFont(new Font("Arial", Font.BOLD, 14));
         backButton.setBackground(new Color(220, 20, 60)); // Crimson
-        backButton.setForeground(Color.WHITE);
+        backButton.setForeground(Color.BLACK);
         backButton.setFocusPainted(false);
         backButton.addActionListener(e -> {
             new LoginFrame().setVisible(true); // Return to login

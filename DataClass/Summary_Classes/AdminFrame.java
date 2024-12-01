@@ -129,6 +129,7 @@ public class AdminFrame extends JFrame {
         List<User> users = FileManager.loadUsers();
         DefaultListModel<String> userModel = new DefaultListModel<>();
         for (User user : users) {
+
             userModel.addElement(user.getName() + " | " + user.getEmail());
         }
 
