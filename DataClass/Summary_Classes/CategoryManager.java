@@ -1,11 +1,8 @@
 
 package Summary_Classes;
+
 import java.io.*;
 import java.util.*;
-/**
- *
- * @author 24hph
- */
 public class CategoryManager implements Serializable {
     private static final long serialVersionUID = 1L;
     private List<Category> categories;
@@ -56,6 +53,25 @@ public class CategoryManager implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void updateMaterialListInCategory(Material material, Category category, List<Material> materials) {
+        CategoryManager CM = new CategoryManager();
+        for (int i = 0; i < materials.size(); i++) {
+            if (materials.get(i).equals(material)) {
+                materials.set(i, material);
+                break;
+            }
+        }
+        for (Category currentCategory:CM.getCategories())
+            {
+               if (currentCategory.equals(category))
+               {
+                   currentCategory.setMaterials(materials);
+               }
+            }
+        CM.saveCategories();
+        FileManager.saveMaterials(materials);
     }
     
     // Load categories from file
