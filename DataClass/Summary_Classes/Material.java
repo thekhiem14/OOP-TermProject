@@ -6,10 +6,6 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.*;
 
-/**
- *
- * @author 24hph
- */
 public class Material implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -66,7 +62,26 @@ public class Material implements Serializable {
     {
         return this.comments;
     }
-
+    
+    public void addComments(Comment newComment)
+    {
+        this.comments.add(newComment);
+    }
+    
+    public void deleteComments(Comment selectedComment)
+    {
+        this.comments.remove(selectedComment);
+    }
+    
+    public void addRating(Rating newRating)
+    {
+        this.ratings.add(newRating);
+    }
+    
+    public void deleteRating(Rating selectedRating)
+    {
+        this.ratings.remove(selectedRating);
+    }
 @Override
     public boolean equals(Object obj) {
         if (this == obj) {
