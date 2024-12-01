@@ -2,7 +2,6 @@ package Summary_Classes;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.util.List;
 
 public class RatingFrame extends JFrame {
