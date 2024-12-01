@@ -129,7 +129,6 @@ public class AdminFrame extends JFrame {
         List<User> users = FileManager.loadUsers();
         DefaultListModel<String> userModel = new DefaultListModel<>();
         for (User user : users) {
-
             userModel.addElement(user.getName() + " | " + user.getEmail());
         }
 
@@ -195,6 +194,17 @@ public class AdminFrame extends JFrame {
             if (confirmation == JOptionPane.YES_OPTION) {
                 materials.remove(selectedMaterial); 
                 materialModel.removeElementAt(selectedIndex); // Update UI
+                CategoryManager CM = new CategoryManager();
+                for (Category ct:CM.getCategories())
+                {
+                    List <Material> m = ct.getMaterials();
+                    if (m.contains(selectedMaterial))
+                    {
+                        ct.deleteMaterial(selectedMaterial);
+                        CM.saveCategories();
+                        break;
+                    }
+                }
                 FileManager.saveMaterials(materials); // Save changes
                 JOptionPane.showMessageDialog(showMaterialsFrame,
                         "Material deleted successfully!",
