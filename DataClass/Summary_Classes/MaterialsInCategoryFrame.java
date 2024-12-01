@@ -153,18 +153,14 @@ public class MaterialsInCategoryFrame extends JFrame {
             if (!title.isEmpty() && !description.isEmpty() && !downloadUrl.isEmpty()) {
                 Material newMaterial = new Material(title, description, downloadUrl, user);
 
-                // Update Category using CategoryManager
-                CategoryManager categoryManager = new CategoryManager();
-                Category currentCategory = categoryManager.findCategoryByName(category.getName());
-                if (currentCategory != null) {
-                    currentCategory.addMaterial(newMaterial);
-                    categoryManager.saveCategories();
-                }
-
-                // Update Material globally
-                List<Material> materials = FileManager.loadMaterials();
-                materials.add(newMaterial);
-                FileManager.saveMaterials(materials);
+            // Update Category using CategoryManager
+            CategoryManager categoryManager = new CategoryManager();
+            Category currentCategory = categoryManager.findCategoryByName(category.getName());
+            if (currentCategory != null) {
+                user.addMaterial(currentCategory, newMaterial);
+            }
+            // Update Material globally
+            FileManager.addMaterialToFile(newMaterial);
 
                 JOptionPane.showMessageDialog(addMaterialFrame,
                         "Material added successfully!",
