@@ -84,12 +84,11 @@ public class CommentFrame extends JFrame {
             String author = user.getEmail();
             String content = contentField.getText().trim();
             if (!content.isEmpty()) {
+                CategoryManager CM = new CategoryManager();
                 Comment newComment = new Comment(author, content);
-                comments.add(newComment);
                 commentModel.addElement(newComment.getAuthorUsername() + ": " + newComment.getContent());
-                material.setComments(comments);
-
-                updateMaterialList(material, category);
+                user.addCommentToMaterial(newComment, material);
+                CM.updateMaterialListInCategory(material, category, materials);
                 addCommentDialog.dispose();
             } else {
                 JOptionPane.showMessageDialog(addCommentDialog, "Content cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -116,11 +115,10 @@ public class CommentFrame extends JFrame {
             if (confirmation == JOptionPane.YES_OPTION) {
                 Comment selectedComment = comments.get(selectedIndex);
                 if (selectedComment.getAuthorUsername().equals(user.getEmail()) || user.isSuperAdmin()) {
-                    comments.remove(selectedIndex);
+                    CategoryManager CM = new CategoryManager();
                     commentModel.remove(selectedIndex);
-
-                    material.setComments(comments);
-                    updateMaterialList(material,category);
+                    user.deleteCommentInMaterial(selectedComment, material);
+                    CM.updateMaterialListInCategory(material, category, materials);
 
                     if (comments.isEmpty()) {
                         commentModel.addElement("No comments available.");
@@ -133,24 +131,5 @@ public class CommentFrame extends JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Please select a comment to delete!", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }
-
-    private void updateMaterialList(Material material, Category category) {
-        CategoryManager CM = new CategoryManager();
-        for (int i = 0; i < materials.size(); i++) {
-            if (materials.get(i).equals(material)) {
-                materials.set(i, material);
-                break;
-            }
-        }
-        for (Category currentCategory:CM.getCategories())
-            {
-               if (currentCategory.equals(category))
-               {
-                   currentCategory.setMaterials(materials);
-               }
-            }
-            CM.saveCategories();
-        FileManager.saveMaterials(materials);
     }
 }
