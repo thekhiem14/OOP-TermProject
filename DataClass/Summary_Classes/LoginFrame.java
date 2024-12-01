@@ -151,8 +151,8 @@ public class LoginFrame extends JFrame {
         registrationPanel.add(studentIdField);
 
         JButton submitButton = new JButton("Register");
+        submitButton.setForeground(Color.BLACK);
         submitButton.setBackground(new Color(0, 102, 204));
-        submitButton.setForeground(Color.WHITE);
         submitButton.setFocusPainted(false);
         submitButton.addActionListener(new ActionListener() {
             @Override

@@ -97,12 +97,15 @@ public class DetailsInMaterialFrame extends JFrame {
         footerPanel.setBackground(new Color(240, 240, 240));
 
         JButton commentButton = createStyledButton("Comment", new Color(46, 139, 87));
+        commentButton.setForeground(Color.BLACK);
         commentButton.addActionListener(e -> new CommentFrame(material,user,category).setVisible(true));
 
         JButton ratingButton = createStyledButton("Rating", new Color(70, 130, 180));
+        ratingButton.setForeground(Color.BLACK);
         ratingButton.addActionListener(e -> new RatingFrame(material,user,category).setVisible(true));
 
         JButton backButton = createStyledButton("Back", new Color(220, 20, 60));
+        backButton.setForeground(Color.BLACK);
         backButton.addActionListener(e -> {
             dispose();
             new MaterialsInCategoryFrame(category, user).setVisible(true);
