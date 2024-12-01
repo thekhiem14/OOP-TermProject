@@ -171,8 +171,7 @@ public class LoginFrame extends JFrame {
                 }
 
                 Student newStudent = new Student(email, password, name, studentId, false);
-                users.add(newStudent);
-                FileManager.saveUsers(users);
+                FileManager.addUserToFile(users, newStudent);
 
                 JOptionPane.showMessageDialog(registrationFrame,
                         "Registration Successful!",
