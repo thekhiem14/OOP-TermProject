@@ -1,7 +1,8 @@
-package Summary_Classes;
+package test;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.util.List;
 
 public class RatingFrame extends JFrame {
@@ -58,38 +59,49 @@ public class RatingFrame extends JFrame {
 
     // Open dialog to add a new rating
     private void openAddRatingDialog(Material material, User user, JLabel averageLabel, Category category) {
-        JDialog addRatingDialog = new JDialog(this, "Add Rating", true);
-        addRatingDialog.setSize(300, 200);
-        addRatingDialog.setLocationRelativeTo(this);
-
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
-        // Rating Input Field
-        JSpinner ratingSpinner = new JSpinner(new SpinnerNumberModel(5, 1, 10, 1));
-        ratingSpinner.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
-
-        JButton addButton = new JButton("Add");
-        addButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        addButton.addActionListener(e -> {
-            int score = (int) ratingSpinner.getValue();
-            Rating newRating = new Rating(user.getEmail(), score);
-            ratings.add(newRating);
-            material.setRatings(ratings);
-            updateMaterial(material,category);
-            averageLabel.setText(String.format("Average Rating: %.2f/10", calculateAverageRating()));
-            addRatingDialog.dispose();
-        });
-
-        panel.add(new JLabel("Score (1-10):"));
-        panel.add(ratingSpinner);
-        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Spacer
-        panel.add(addButton);
-
-        addRatingDialog.add(panel);
-        addRatingDialog.setVisible(true);
+    // Kiểm tra xem người dùng đã đánh giá chưa
+    for (Rating rating : ratings) {
+        if (rating.getRaterUsername().equals(user.getEmail())) {
+            JOptionPane.showMessageDialog(this,
+                    "You have already rated this material.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return; // Thoát ra, không mở hộp thoại thêm đánh giá
+        }
     }
+
+    JDialog addRatingDialog = new JDialog(this, "Add Rating", true);
+    addRatingDialog.setSize(300, 200);
+    addRatingDialog.setLocationRelativeTo(this);
+
+    JPanel panel = new JPanel();
+    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+    panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+    // Rating Input Field
+    JSpinner ratingSpinner = new JSpinner(new SpinnerNumberModel(5, 1, 10, 1));
+    ratingSpinner.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
+
+    JButton addButton = new JButton("Add");
+    addButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+    addButton.addActionListener(e -> {
+        int score = (int) ratingSpinner.getValue();
+        Rating newRating = new Rating(user.getEmail(), score);
+        ratings.add(newRating); // Thêm đánh giá mới
+        material.setRatings(ratings); // Cập nhật danh sách đánh giá trong tài liệu
+        updateMaterial(material, category); // Lưu vào tệp
+        averageLabel.setText(String.format("Average Rating: %.2f/10", calculateAverageRating())); // Cập nhật điểm trung bình
+        addRatingDialog.dispose();
+    });
+
+    panel.add(new JLabel("Score (1-10):"));
+    panel.add(ratingSpinner);
+    panel.add(Box.createRigidArea(new Dimension(0, 10))); // Spacer
+    panel.add(addButton);
+
+    addRatingDialog.add(panel);
+    addRatingDialog.setVisible(true);
+}
 
    // Delete selected rating
 private void deleteSelectedRating(List<Rating> ratings, Material material, User user, JLabel averageLabel, Category category) {
