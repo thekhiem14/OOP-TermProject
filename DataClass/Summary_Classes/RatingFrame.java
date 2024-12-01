@@ -85,11 +85,11 @@ public class RatingFrame extends JFrame {
     JButton addButton = new JButton("Add");
     addButton.setAlignmentX(Component.CENTER_ALIGNMENT);
     addButton.addActionListener(e -> {
+        CategoryManager CM = new CategoryManager();
         int score = (int) ratingSpinner.getValue();
         Rating newRating = new Rating(user.getEmail(), score);
-        ratings.add(newRating); // Thêm đánh giá mới
-        material.setRatings(ratings); // Cập nhật danh sách đánh giá trong tài liệu
-        updateMaterial(material, category); // Lưu vào tệp
+        user.addRatingToMaterial(newRating, material);
+        CM.updateMaterialListInCategory(material, category, materials);
         averageLabel.setText(String.format("Average Rating: %.2f/10", calculateAverageRating())); // Cập nhật điểm trung bình
         addRatingDialog.dispose();
     });
@@ -115,9 +115,11 @@ private void deleteSelectedRating(List<Rating> ratings, Material material, User 
                     "Confirm Deletion",
                     JOptionPane.YES_NO_OPTION);
             if (confirmation == JOptionPane.YES_OPTION) {
-                ratings.remove(i);
-                material.setRatings(ratings);
-                updateMaterial(material, category); // Cập nhật dữ liệu
+                CategoryManager CM = new CategoryManager();
+                Rating yourRating = ratings.get(i);
+                ratings.remove(yourRating);
+                user.deleteRatingInMaterial(yourRating, material);
+                CM.updateMaterialListInCategory(material, category, materials); // Cập nhật dữ liệu
                 averageLabel.setText(ratings.isEmpty() ?
                         "No ratings available." :
                         String.format("Average Rating: %.2f/10", calculateAverageRating()));
@@ -142,24 +144,5 @@ private void deleteSelectedRating(List<Rating> ratings, Material material, User 
         }
         return ratings.stream().mapToInt(Rating::getScore).average().orElse(0.0);
     }
-
-    // Update material ratings in the file
-    private void updateMaterial(Material material, Category category) {
-        CategoryManager CM = new CategoryManager();
-        for (int i = 0; i < materials.size(); i++) {
-            if (materials.get(i).equals(material)) {
-                materials.set(i, material);
-                break;
-            }
-        }
-        for (Category currentCategory:CM.getCategories())
-            {
-               if (currentCategory.equals(category))
-               {
-                   currentCategory.setMaterials(materials);
-               }
-            }
-        CM.saveCategories();
-        FileManager.saveMaterials(materials);
-    }
 }
+
