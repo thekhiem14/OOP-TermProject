@@ -1,8 +1,12 @@
-
-package Summary_Classes;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package test;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -14,6 +18,35 @@ public class Admin extends User implements Serializable {
     
     public Admin(String email, String password, String name, boolean isSuperAdmin) {
         super(email, password, name, isSuperAdmin);
+    }
+    
+    public void addCategory(String categoryName)
+    {
+        CategoryManager categoryManager = new CategoryManager();
+        categoryManager.addCategory(new Category(categoryName));
+    }
+    
+    public void deleteUser(List<User> users, int selectedIndex)
+    {
+        users.remove(selectedIndex);
+        FileManager.saveUsers(users);
+    }
+    
+    public void deleteMaterial(List<Material> materials, Material selectedMaterial)
+    {
+        materials.remove(selectedMaterial); 
+        CategoryManager CM = new CategoryManager();
+        for (Category currentCategory:CM.getCategories())
+        {
+            List <Material> m = currentCategory.getMaterials();
+            if (m.contains(selectedMaterial))
+            {
+                CM.deleteMaterialInCategory(currentCategory,selectedMaterial);
+                break;
+            }
+        }
+        CM.saveCategories();
+        FileManager.saveMaterials(materials);
     }
     
     @Override
