@@ -1,78 +1,50 @@
-package Summary_Classes;
-import java.sql.*;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package test;
 
-public class User {
-    private String fullName, phone, email, password, avatar, userToken, status;
-    private Timestamp createdAt, deletedAt;
+import java.io.Serial;
+import java.io.Serializable;
 
-    public void setUserToken(String userToken) {
-        this.userToken = userToken;
-    }
+/**
+ *
+ * @author 24hph
+ */
+public abstract class User implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
 
-    public User(String fullName, String phone, String email, String password, String avatar) {
-        this.fullName = fullName;
-        this.phone = phone;
+    private String email;
+    private String password;
+    private String name;
+    private boolean isSuperAdmin;
+    
+    public User(String email, String password, String name, boolean isSuperAdmin) {
         this.email = email;
         this.password = password;
-        this.avatar = avatar;
-        this.status = "active";
-        this.createdAt = new Timestamp(System.currentTimeMillis());
+        this.name = name;
+        this.isSuperAdmin = isSuperAdmin;
     }
-
-    public void deleteAccount(){
-        this.status = "inactive";
-        this.deletedAt = new Timestamp(System.currentTimeMillis());
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
+    
+    // Getters and setters
+    public boolean isSuperAdmin() {
+        return isSuperAdmin;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getPassword() {
         return password;
     }
-
-    public String getAvatar() {
-        return avatar;
+    
+    public String getName()
+    {
+        return name;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public String getUserToken() {
-        return userToken;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public Timestamp getDeletedAt() {
-        return deletedAt;
-    }
+    // Abstract login method
+    public abstract boolean login(String password);
 }
