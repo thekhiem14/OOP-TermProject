@@ -1,10 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Summary_Classes;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 /**
  *
@@ -13,17 +11,17 @@ import java.io.Serializable;
 public class Comment implements Serializable {
     private static final long serialVersionUID = 1L;
     
-    private User author; // Store username instead of User object
+    private String author; // Store username instead of User object
     private String content;
-    private String timestamp;
+    private Timestamp timestamp;
     
-    public Comment(User authorUsername, String content, String timestamp) {
+    public Comment(String authorUsername, String content) {
         this.author = authorUsername;
         this.content = content;
-        this.timestamp = timestamp;
+         this.timestamp = new Timestamp(System.currentTimeMillis());
     }
     
-    public User getAuthorUsername() {
+    public String getAuthorUsername() {
         return author;
     }
     
@@ -31,7 +29,7 @@ public class Comment implements Serializable {
         return content;
     }
     
-    public String getTimestamp() {
+    public Timestamp getTimestamp() {
         return timestamp;
     }
 }

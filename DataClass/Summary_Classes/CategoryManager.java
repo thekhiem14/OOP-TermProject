@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Summary_Classes;
 import java.io.*;
 import java.util.*;
@@ -38,6 +35,11 @@ public class CategoryManager implements Serializable {
     
     public List<Category> getCategories() {
         return categories;
+    }
+    
+    public void deleteMaterialInCategory(Category category,Material material){
+        this.findCategoryByName(category.getName()).deleteMaterial(material);
+        saveCategories();
     }
     
     public Category findCategoryByName(String name) {

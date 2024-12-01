@@ -2,7 +2,6 @@ package Summary_Classes;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
 public class CategorySelectionFrame extends JFrame {
     private CategoryManager categoryManager;

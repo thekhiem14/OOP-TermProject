@@ -129,7 +129,10 @@ public class AdminFrame extends JFrame {
         List<User> users = FileManager.loadUsers();
         DefaultListModel<String> userModel = new DefaultListModel<>();
         for (User user : users) {
-            userModel.addElement(user.getName() + " | " + user.getEmail());
+            String x = "";
+            if (user.isSuperAdmin()) x = "Admin";
+            else x = "Student";
+            userModel.addElement(user.getName() + " | " + user.getEmail() + " | " + x);
         }
 
         JList<String> userList = new JList<>(userModel);
@@ -195,16 +198,16 @@ public class AdminFrame extends JFrame {
                 materials.remove(selectedMaterial); 
                 materialModel.removeElementAt(selectedIndex); // Update UI
                 CategoryManager CM = new CategoryManager();
-                for (Category ct:CM.getCategories())
+                for (Category currentCategory:CM.getCategories())
                 {
-                    List <Material> m = ct.getMaterials();
+                    List <Material> m = currentCategory.getMaterials();
                     if (m.contains(selectedMaterial))
                     {
-                        ct.deleteMaterial(selectedMaterial);
-                        CM.saveCategories();
+                        CM.deleteMaterialInCategory(currentCategory,selectedMaterial);
                         break;
                     }
                 }
+                CM.saveCategories();
                 FileManager.saveMaterials(materials); // Save changes
                 JOptionPane.showMessageDialog(showMaterialsFrame,
                         "Material deleted successfully!",

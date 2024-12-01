@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Summary_Classes;
 
 import java.io.Serial;
@@ -46,6 +43,14 @@ public class Material implements Serializable {
     public String getTitle() {
         return title;
     }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+    }
     
     public String getDescription() {
         return description;
@@ -56,4 +61,32 @@ public class Material implements Serializable {
     }
 
     public Timestamp getUploadDate() {return uploadDate;}
+    
+    public List<Comment> getComments()
+    {
+        return this.comments;
+    }
+
+@Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;  
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;  
+        }
+        Material material = (Material) obj;  
+        return downloadUrl.equals(material.downloadUrl);  
+    }
+
+    @Override
+    public int hashCode() {
+        int result = downloadUrl.hashCode();  
+        result = 31 * result; 
+        return result;
+    }
+
+    public List<Rating> getRatings() {
+        return this.ratings;
+    }
 }

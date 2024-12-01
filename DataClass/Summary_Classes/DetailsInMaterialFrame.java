@@ -16,7 +16,7 @@ public class DetailsInMaterialFrame extends JFrame {
         JPanel mainPanel = createMainPanel();
         JPanel headerPanel = createHeaderPanel();
         JPanel detailsPanel = createDetailsPanel(material);
-        JPanel footerPanel = createFooterPanel(category, user);
+        JPanel footerPanel = createFooterPanel(material, category, user);
 
         // Thêm các phần vào panel chính
         mainPanel.add(headerPanel, BorderLayout.NORTH);
@@ -92,15 +92,15 @@ public class DetailsInMaterialFrame extends JFrame {
         return detailsPanel;
     }
 
-    private JPanel createFooterPanel(Category category, User user) {
+    private JPanel createFooterPanel(Material material, Category category, User user) {
         JPanel footerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         footerPanel.setBackground(new Color(240, 240, 240));
 
         JButton commentButton = createStyledButton("Comment", new Color(46, 139, 87));
-        commentButton.addActionListener(e -> JOptionPane.showMessageDialog(this, "Open comment frame!"));
+        commentButton.addActionListener(e -> new CommentFrame(material,user,category).setVisible(true));
 
         JButton ratingButton = createStyledButton("Rating", new Color(70, 130, 180));
-        ratingButton.addActionListener(e -> JOptionPane.showMessageDialog(this, "Open rating frame!"));
+        ratingButton.addActionListener(e -> new RatingFrame(material,user,category).setVisible(true));
 
         JButton backButton = createStyledButton("Back", new Color(220, 20, 60));
         backButton.addActionListener(e -> {
@@ -146,7 +146,6 @@ public class DetailsInMaterialFrame extends JFrame {
                 }
             }
         });
-
         return hyperlink;
     }
 }
