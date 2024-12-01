@@ -4,6 +4,7 @@
  */
 package Summary_Classes;
 
+
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -24,3 +25,4 @@ public class Admin extends User implements Serializable {
         return this.getPassword().equals(password);
     }
 }
+
