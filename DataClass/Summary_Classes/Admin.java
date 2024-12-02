@@ -8,10 +8,6 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- *
- * @author 24hph
- */
 public class Admin extends User implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;

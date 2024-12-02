@@ -3,10 +3,6 @@ package Summary_Classes;
 
 import java.io.Serializable;
 
-/**
- *
- * @author 24hph
- */
 public class Rating implements Serializable {
     private static final long serialVersionUID = 1L;
     
