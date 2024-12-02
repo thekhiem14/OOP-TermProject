@@ -81,7 +81,7 @@ public class CommentFrame extends JFrame {
         JButton addButton = new JButton("Add");
         addButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         addButton.addActionListener(e -> {
-            String author = user.getEmail();
+            User author = user;
             String content = contentField.getText().trim();
             if (!content.isEmpty()) {
                 CategoryManager CM = new CategoryManager();
