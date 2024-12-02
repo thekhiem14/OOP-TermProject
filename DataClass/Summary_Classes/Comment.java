@@ -7,18 +7,18 @@ import java.sql.Timestamp;
 public class Comment implements Serializable {
     private static final long serialVersionUID = 1L;
     
-    private String author; // Store username instead of User object
+    private User author; // Store username instead of User object
     private String content;
     private Timestamp timestamp;
     
-    public Comment(String authorUsername, String content) {
+    public Comment(User authorUsername, String content) {
         this.author = authorUsername;
         this.content = content;
          this.timestamp = new Timestamp(System.currentTimeMillis());
     }
     
     public String getAuthorUsername() {
-        return author;
+        return author.getEmail();
     }
     
     public String getContent() {
@@ -48,4 +48,3 @@ public class Comment implements Serializable {
         return result;
     }
 }
-
