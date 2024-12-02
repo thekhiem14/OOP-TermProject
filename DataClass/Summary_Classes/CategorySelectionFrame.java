@@ -53,7 +53,7 @@ public class CategorySelectionFrame extends JFrame {
         // Footer panel
         JPanel footerPanel = new JPanel();
         footerPanel.setBackground(new Color(240, 240, 240));
-        JButton backButton = new JButton("Back");
+        JButton backButton = new JButton("Logout");
         backButton.setFont(new Font("Arial", Font.BOLD, 14));
         backButton.setBackground(new Color(220, 20, 60)); // Crimson
         backButton.setForeground(Color.BLACK);
