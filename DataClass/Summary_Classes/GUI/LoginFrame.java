@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.List;
 import Summary_Classes.*;
-
+import java.io.File;
 public class LoginFrame extends JFrame {
     private List<User> users;
 
@@ -40,9 +40,23 @@ public class LoginFrame extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 10, 10, 10);
 
-        // Username field
+        // Add Image
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.gridwidth = 2; // Chiếm 2 cột
+        gbc.anchor = GridBagConstraints.CENTER;
+        try {
+            ImageIcon loginIcon = new ImageIcon("login.png");
+            JLabel imageLabel = new JLabel(loginIcon);
+            loginPanel.add(imageLabel, gbc);
+        } catch (Exception e) {
+            System.err.println("Image not found: " + e.getMessage());
+        }
+        gbc.gridwidth = 1; // Reset lại sau khi thêm ảnh
+
+        // Username field
+        gbc.gridx = 0;
+        gbc.gridy = 1;
         loginPanel.add(new JLabel("Username:"), gbc);
         JTextField emailField = new JTextField(20);
         gbc.gridx = 1;
@@ -50,7 +64,7 @@ public class LoginFrame extends JFrame {
 
         // Password field
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         loginPanel.add(new JLabel("Password:"), gbc);
         JPasswordField passwordField = new JPasswordField(20);
         gbc.gridx = 1;
@@ -68,10 +82,8 @@ public class LoginFrame extends JFrame {
                 String email = emailField.getText();
                 String password = new String(passwordField.getPassword());
                 boolean checkUser = false;
-                for (User user:users)
-                {
-                    if (user.getEmail().equals(email) && user.login(password))
-                    {
+                for (User user : users) {
+                    if (user.getEmail().equals(email) && user.login(password)) {
                         LoginFrame.this.dispose();
                         if (user.isSuperAdmin()) {
                             checkUser = true;
@@ -83,7 +95,7 @@ public class LoginFrame extends JFrame {
                         }
                     }
                 }
-                if (!checkUser){
+                if (!checkUser) {
                     JOptionPane.showMessageDialog(LoginFrame.this,
                             "Invalid username or password",
                             "Login Error",
@@ -93,7 +105,7 @@ public class LoginFrame extends JFrame {
         });
 
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER;
         loginPanel.add(loginButton, gbc);
@@ -172,14 +184,14 @@ public class LoginFrame extends JFrame {
                 }
                 List<User> users = FileManager.loadUsers();
                 boolean error = false;
-                for (User user:users){
+                for (User user : users) {
                     if (user.getEmail().equals(email)) {
                         error = true;
                         break;
                     }
                 }
 
-                if(error){
+                if (error) {
                     JOptionPane.showMessageDialog(registrationFrame,
                             "Email has been registered!",
                             "Registration Error",
