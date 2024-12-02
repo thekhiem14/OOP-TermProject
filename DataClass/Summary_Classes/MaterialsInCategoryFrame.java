@@ -153,14 +153,14 @@ public class MaterialsInCategoryFrame extends JFrame {
             if (!title.isEmpty() && !description.isEmpty() && !downloadUrl.isEmpty()) {
                 Material newMaterial = new Material(title, description, downloadUrl, user);
 
-            // Update Category using CategoryManager
-            CategoryManager categoryManager = new CategoryManager();
-            Category currentCategory = categoryManager.findCategoryByName(category.getName());
-            if (currentCategory != null) {
-                user.addMaterial(currentCategory, newMaterial);
-            }
-            // Update Material globally
-            FileManager.addMaterialToFile(newMaterial);
+                // Update Category using CategoryManager
+                CategoryManager categoryManager = new CategoryManager();
+                Category currentCategory = categoryManager.findCategoryByName(category.getName());
+                if (currentCategory != null) {
+                    user.addMaterial(currentCategory, newMaterial);
+                }
+                // Update Material globally
+                FileManager.addMaterialToFile(newMaterial);
 
                 JOptionPane.showMessageDialog(addMaterialFrame,
                         "Material added successfully!",
@@ -170,6 +170,8 @@ public class MaterialsInCategoryFrame extends JFrame {
 
                 addMaterialFrame.dispose();
                 // Refresh and reload the main frame
+                categoryManager = new CategoryManager();
+                currentCategory = categoryManager.findCategoryByName(category.getName());
                 MaterialsInCategoryFrame.this.dispose(); // Close current frame
                 new MaterialsInCategoryFrame(currentCategory, user).setVisible(true);
             } else {
