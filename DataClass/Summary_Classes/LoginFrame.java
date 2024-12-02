@@ -169,6 +169,22 @@ public class LoginFrame extends JFrame {
                             JOptionPane.ERROR_MESSAGE);
                     return;
                 }
+                List<User> users = FileManager.loadUsers();
+                boolean error = false;
+                for (User user:users){
+                    if (user.getEmail().equals(email)) {
+                        error = true;
+                        break;
+                    }
+                }
+
+                if(error){
+                    JOptionPane.showMessageDialog(registrationFrame,
+                            "Email has been registered!",
+                            "Registration Error",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
                 Student newStudent = new Student(email, password, name, studentId, false);
                 FileManager.addUserToFile(users, newStudent);
