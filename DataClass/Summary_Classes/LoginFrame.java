@@ -69,19 +69,17 @@ public class LoginFrame extends JFrame {
                 boolean checkUser = false;
                 for (User user:users)
                 {
-                    if (user.getEmail().equals(email))
+                    if (user.getEmail().equals(email) && user.login(password))
                     {
                         if (user.isSuperAdmin()) {
                             checkUser = true;
                             new AdminFrame(user).setVisible(true);
                             break;
                         } else {
-                            if (user.login(password))
-                            {
-                                checkUser = true;
-                                new CategorySelectionFrame(user).setVisible(true);
-                            } 
+                            checkUser = true;
+                            new CategorySelectionFrame(user).setVisible(true);
                         }
+                        dispose();
                     }
                 }
                 if (!checkUser){
