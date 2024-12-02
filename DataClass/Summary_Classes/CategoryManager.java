@@ -17,11 +17,11 @@ public class CategoryManager implements Serializable {
     }
     
     private void initializeDefaultCategories() {
-        categories.add(new Category("Programming"));
-        categories.add(new Category("Mathematics"));
-        categories.add(new Category("Science"));
-        categories.add(new Category("Language"));
-        categories.add(new Category("History"));
+        categories.add(new Category("Dai So"));
+        categories.add(new Category("Giai Tich"));
+        categories.add(new Category("Tin Hoc Co So"));
+        categories.add(new Category("Vat Li"));
+        categories.add(new Category("Xac Suat Thong Ke"));
         saveCategories();
     }
     
