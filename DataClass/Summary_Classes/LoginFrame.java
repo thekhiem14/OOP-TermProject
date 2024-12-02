@@ -71,6 +71,7 @@ public class LoginFrame extends JFrame {
                 {
                     if (user.getEmail().equals(email) && user.login(password))
                     {
+                        LoginFrame.this.dispose();
                         if (user.isSuperAdmin()) {
                             checkUser = true;
                             new AdminFrame(user).setVisible(true);
@@ -79,7 +80,6 @@ public class LoginFrame extends JFrame {
                             checkUser = true;
                             new CategorySelectionFrame(user).setVisible(true);
                         }
-                        dispose();
                     }
                 }
                 if (!checkUser){
