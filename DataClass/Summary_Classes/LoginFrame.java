@@ -66,25 +66,16 @@ public class LoginFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String email = emailField.getText();
                 String password = new String(passwordField.getPassword());
-                boolean checkUser = false;
-                for (User user:users)
-                {
-                    if (user.getEmail().equals(email))
-                    {
-                        if (user.isSuperAdmin()) {
-                            checkUser = true;
-                            new AdminFrame(user).setVisible(true);
-                            break;
-                        } else {
-                            if (user.login(password))
-                            {
-                                checkUser = true;
-                                new CategorySelectionFrame(user).setVisible(true);
-                            } 
-                        }
+
+                User user = authenticateUser(email, password);
+                if (user != null) {
+                    if (user.isSuperAdmin()) {
+                        new AdminFrame(user).setVisible(true);
+                    } else {
+                        new CategorySelectionFrame(user).setVisible(true);
                     }
-                }
-                if (!checkUser){
+                    dispose();
+                } else {
                     JOptionPane.showMessageDialog(LoginFrame.this,
                             "Invalid username or password",
                             "Login Error",
@@ -126,6 +117,13 @@ public class LoginFrame extends JFrame {
 
         // Set the frame visible
         setVisible(true);
+    }
+
+    private User authenticateUser(String email, String password) {
+        return users.stream()
+                .filter(user -> user.getEmail().equals(email) && user.login(password))
+                .findFirst()
+                .orElse(null);
     }
 
     private void openRegistrationFrame() {
