@@ -82,6 +82,7 @@ public class LoginFrame extends JFrame {
                                 new CategorySelectionFrame(user).setVisible(true);
                             } 
                         }
+                        LoginFrame.this.dispose();
                     }
                 }
                 if (!checkUser){
