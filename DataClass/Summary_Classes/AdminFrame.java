@@ -144,7 +144,7 @@ public class AdminFrame extends JFrame {
                 if(users.get(selectedIndex).getEmail().equals(thisUser.getEmail()))
                     JOptionPane.showMessageDialog(showUsersFrame, "Can't delete yourself!", "Error", JOptionPane.ERROR_MESSAGE);
                 else if(users.get(selectedIndex).isSuperAdmin())
-                    JOptionPane.showMessageDialog(showUsersFrame, "Can't other Admin!", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(showUsersFrame, "Can't delete other Admin!", "Error", JOptionPane.ERROR_MESSAGE);
                 else{
                     users.remove(selectedIndex);
                     userModel.remove(selectedIndex);
