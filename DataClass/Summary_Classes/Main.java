@@ -1,5 +1,7 @@
 package Summary_Classes;
 
+import Summary_Classes.GUI.LoginFrame;
+
 import javax.swing.*;
 
 public class Main
