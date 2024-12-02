@@ -171,7 +171,7 @@ public class MaterialsInCategoryFrame extends JFrame {
                 addMaterialFrame.dispose();
                 // Refresh and reload the main frame
                 MaterialsInCategoryFrame.this.dispose(); // Close current frame
-                new MaterialsInCategoryFrame(categoryManager.findCategoryByName(category.getName()), user).setVisible(true);
+                new MaterialsInCategoryFrame(currentCategory, user).setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(addMaterialFrame,
                         "Please fill in all fields!",

@@ -41,8 +41,7 @@ public abstract class User implements Serializable {
     public void addMaterial(Category currentCategory, Material newMaterial)
     {
         CategoryManager categoryManager = new CategoryManager();
-        currentCategory.addMaterial(newMaterial);
-        categoryManager.saveCategories();
+        categoryManager.addMaterialToCategory(currentCategory, newMaterial);
     }
     public void addCommentToMaterial(Comment newComment,Material material)
     {

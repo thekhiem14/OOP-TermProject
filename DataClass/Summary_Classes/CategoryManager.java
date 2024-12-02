@@ -38,6 +38,12 @@ public class CategoryManager implements Serializable {
         this.findCategoryByName(category.getName()).deleteMaterial(material);
         saveCategories();
     }
+
+    public void addMaterialToCategory(Category category, Material newMaterial)
+    {
+        this.findCategoryByName(category.getName()).addMaterial(newMaterial);
+        saveCategories();
+    }
     
     public Category findCategoryByName(String name) {
         return categories.stream()
