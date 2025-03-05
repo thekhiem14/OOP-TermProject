@@ -40,9 +40,9 @@ A study materials management application built using Java and Swing, following t
 
 ## Authur
 
-- **Tường Duy Minh Tú** - B22DCDT282
 - **Nguyễn Thế Khiêm** - B22DCDT171
 - **Đặng Tuấn Phong** - B22DCCN612
+- **Tường Duy Minh Tú** - B22DCDT282
 
 # Final (12/02/2024)
 ## This is all the documentation of our project : [Report](https://drive.google.com/file/d/1PUci62m10H_-_FQAPpp6jLWQ1VGkhNy7/view?fbclid=IwZXh0bgNhZW0CMTAAAR1fdzmPD_mmJeEOMv_qb908rX0Zos9X_hlBdWMZUS9pjBZyausEQ3ExPsA_aem_au5OxAHdD1Zy43XBqmsX3A)
