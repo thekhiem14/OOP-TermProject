@@ -1,38 +1,50 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Summary_Classes;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
-/**
- *
- * @author 24hph
- */
 public class Comment implements Serializable {
     private static final long serialVersionUID = 1L;
     
     private User author; // Store username instead of User object
     private String content;
-    private String timestamp;
+    private Timestamp timestamp;
     
-    public Comment(User authorUsername, String content, String timestamp) {
+    public Comment(User authorUsername, String content) {
         this.author = authorUsername;
         this.content = content;
-        this.timestamp = timestamp;
+         this.timestamp = new Timestamp(System.currentTimeMillis());
     }
     
-    public User getAuthorUsername() {
-        return author;
+    public String getAuthorUsername() {
+        return author.getEmail();
     }
     
     public String getContent() {
         return content;
     }
     
-    public String getTimestamp() {
+    public Timestamp getTimestamp() {
         return timestamp;
     }
-}
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;  
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;  
+        }
+        Comment comment = (Comment) obj;  
+        return author.equals(comment.author) && content.equals(comment.content);  
+    }
 
+    @Override
+    public int hashCode() {
+        int result = author.hashCode();  
+        result = 31 * result + content.hashCode(); 
+        return result;
+    }
+}

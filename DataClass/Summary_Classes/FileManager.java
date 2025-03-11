@@ -1,14 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Summary_Classes;
 import java.util.*;
 import java.io.*;
-/**
- *
- * @author 24hph
- */
+
 public class FileManager {
     private static final String USERS_FILE = "users.ser";
     private static final String MATERIALS_FILE = "materials.ser";
@@ -21,6 +15,13 @@ public class FileManager {
         } catch (IOException e) {
             System.err.println("Error saving users: " + e.getMessage());
         }
+    }
+    
+    // Add user to file
+    public static void addUserToFile(List<User> users, Student newStudent)
+    {
+        users.add(newStudent);
+        FileManager.saveUsers(users);
     }
     
     // Load users from file
@@ -48,6 +49,14 @@ public class FileManager {
         }
     }
     
+    // Add material to file
+    public static void addMaterialToFile(Material newMaterial)
+    {
+        List<Material> materials = FileManager.loadMaterials();
+        materials.add(newMaterial);
+        FileManager.saveMaterials(materials);
+    }
+    
     // Load materials from file
     @SuppressWarnings("unchecked")
     public static List<Material> loadMaterials() {
@@ -61,4 +70,5 @@ public class FileManager {
             return new ArrayList<>();
         }
     }
+    
 }

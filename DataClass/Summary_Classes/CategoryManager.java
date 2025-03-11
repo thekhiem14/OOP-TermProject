@@ -1,14 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Summary_Classes;
+
 import java.io.*;
 import java.util.*;
-/**
- *
- * @author 24hph
- */
 public class CategoryManager implements Serializable {
     private static final long serialVersionUID = 1L;
     private List<Category> categories;
@@ -23,11 +17,11 @@ public class CategoryManager implements Serializable {
     }
     
     private void initializeDefaultCategories() {
-        categories.add(new Category("Programming"));
-        categories.add(new Category("Mathematics"));
-        categories.add(new Category("Science"));
-        categories.add(new Category("Language"));
-        categories.add(new Category("History"));
+        categories.add(new Category("Dai So"));
+        categories.add(new Category("Giai Tich"));
+        categories.add(new Category("Tin Hoc Co So"));
+        categories.add(new Category("Vat Li"));
+        categories.add(new Category("Xac Suat Thong Ke"));
         saveCategories();
     }
     
@@ -38,6 +32,17 @@ public class CategoryManager implements Serializable {
     
     public List<Category> getCategories() {
         return categories;
+    }
+    
+    public void deleteMaterialInCategory(Category category,Material material){
+        this.findCategoryByName(category.getName()).deleteMaterial(material);
+        saveCategories();
+    }
+
+    public void addMaterialToCategory(Category category, Material newMaterial)
+    {
+        this.findCategoryByName(category.getName()).addMaterial(newMaterial);
+        saveCategories();
     }
     
     public Category findCategoryByName(String name) {
@@ -54,6 +59,25 @@ public class CategoryManager implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void updateMaterialListInCategory(Material material, Category category, List<Material> materials) {
+        CategoryManager CM = new CategoryManager();
+        for (int i = 0; i < materials.size(); i++) {
+            if (materials.get(i).equals(material)) {
+                materials.set(i, material);
+                break;
+            }
+        }
+        for (Category currentCategory:CM.getCategories())
+            {
+               if (currentCategory.equals(category))
+               {
+                   currentCategory.setMaterials(materials);
+               }
+            }
+        CM.saveCategories();
+        FileManager.saveMaterials(materials);
     }
     
     // Load categories from file

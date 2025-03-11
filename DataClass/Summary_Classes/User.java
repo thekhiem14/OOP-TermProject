@@ -1,16 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Summary_Classes;
 
 import java.io.Serial;
 import java.io.Serializable;
 
-/**
- *
- * @author 24hph
- */
 public abstract class User implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -44,7 +37,31 @@ public abstract class User implements Serializable {
     {
         return name;
     }
-
+    
+    public void addMaterial(Category currentCategory, Material newMaterial)
+    {
+        CategoryManager categoryManager = new CategoryManager();
+        categoryManager.addMaterialToCategory(currentCategory, newMaterial);
+    }
+    public void addCommentToMaterial(Comment newComment,Material material)
+    {
+        material.addComments(newComment);
+    }
+    
+    public void deleteCommentInMaterial(Comment selectedComment, Material material)
+    {
+        material.deleteComments(selectedComment);
+    }
+    
+    public void addRatingToMaterial(Rating newRating, Material material)
+    {
+        material.addRating(newRating);
+    }
+    
+    public void deleteRatingInMaterial(Rating yourRating, Material material)
+    {
+        material.deleteRating(yourRating);
+    }
     // Abstract login method
-    public abstract boolean login(String password);
+    public  boolean login(String password){return this.getPassword().equals(password);};
 }
